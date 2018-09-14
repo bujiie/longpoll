@@ -1,0 +1,14 @@
+{
+  "name": "longpoll",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "brian.ujiie <brian.ujiie@workday.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

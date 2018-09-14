@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Title of the document</title>
+<style type="text/css">
+  html, body {
+    font-size: 12px;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #header {
+    padding: 0 24px;
+  }
+
+  #controls {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #cccccc;
+  }
+
+  #controls div {
+    padding-right: 24px;
+  }
+
+  #controls button {
+    padding: 16px;
+    border: none;
+    background-color: #36BEDF;
+    border-radius: 3px;
+    color: #ffffff;
+    width: 100px;
+  }
+
+  #controls input {
+    padding: 15px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+  }
+
+  #response {
+    flex: 1;
+    padding: 24px;
+  }
+
+  .response-line {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .response-id {
+    flex: 1;
+  }
+
+  .response-start-timestamp {
+    flex: 8;
+  }
+
+  .response-end-timestamp {
+    flex: 8;
+  }
+
+  .response-wait {
+    flex: 1;
+  }
+
+  .response-line div {
+    padding: 16px 16px 0 16px;
+  }
+
+  .response-header {
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .response-header div {
+    padding: 16px;
+    font-weight: 800;
+  }
+
+  #status {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #status div {
+    padding: 16px;
+  }
+</style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <h2>Long Polling Example</h2>
+    </div>
+    <div id="controls">
+      <div>
+        <button id="immediate" class="btn btn-success">Immediate</button>
+      </div>
+      <div>
+        <button id="random" class="btn btn-success">Random</button>
+      </div>
+      <div>
+        <button id="specific" class="btn btn-success">Specific</button>
+        <input id="specific-value" placeholder="wait (ms)" />
+      </div>
+      <div>
+        <button id="range" class="btn btn-success">Range</button>
+        <input id="range-min" placeholder="min (ms)" />
+        <input id="range-max" placeholder="max (ms)" />
+      </div>
+      <div>
+        X <input id="multiplier" placeholder="multiplier" />
+        <button id="clear" class="btn btn-success">Clear</button>
+      </div>
+    </div>
+    <div id="status">
+      <div id="status-immediate">Immediate: <span class="value">0</span></div>
+      <div id="status-random">Random: <span class="value">0</span></div>
+      <div id="status-specific">Specific: <span class="value">0</span></div>
+      <div id="status-range">Range: <span class="value">0</span></div>
+    </div>
+    <div id="response">
+      <div class="response-header">
+        <div class="response-id">ID</div>
+        <div class="response-wait">Wait (ms)</div>
+        <div class="response-start-timestamp">Start Timestamp</div>
+        <div class="response-end-timestamp">End Timestamp</div>
+      </div>
+    </div>
+  </div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="client.js"></script>
+</body>
+
+</html>
