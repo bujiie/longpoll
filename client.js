@@ -10,12 +10,14 @@ $(document).ready(() => {
   let count = 0;
   const timeout = 50000;
 
-  const counter = {
+  const counterInit = {
     immediate: 0,
     random: 0,
     specific: 0,
     range: 0
   };
+
+  let counter = Object.assign({}, counterInit);
 
   $('#immediate').on('click', () => {
     for (let i = 0; i < getMultiplier(); i++) {
@@ -50,6 +52,11 @@ $(document).ready(() => {
 
   $('#clear').on('click', () => {
     $('#response .response-line').remove();
+    counter = Object.assign({}, counterInit);
+    updateCounter($immediate, 0);
+    updateCounter($random, 0);
+    updateCounter($specific, 0);
+    updateCounter($range, 0);
   })
 
   function getMultiplier() {
