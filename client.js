@@ -6,6 +6,7 @@ $(document).ready(() => {
   const $random = $('#status-random .value');
   const $specific = $('#status-specific .value');
   const $range = $('#status-range .value');
+  const $queue = $('#status-queue .value');
 
   let count = 0;
   const timeout = 50000;
@@ -14,10 +15,25 @@ $(document).ready(() => {
     immediate: 0,
     random: 0,
     specific: 0,
-    range: 0
+    range: 0,
+    queue: 0
   };
 
   let counter = Object.assign({}, counterInit);
+
+  $('#queue').on('click', () => {
+    makeRequest("http://localhost:1234/queue", timeout, makeRequest);
+    updateCounter($queue, counter.queue += 1);
+  })
+
+  $('#queue-push').on('click', () => {
+    makeRequest("http://localhost:1234/queue/push", timeout);
+  })
+
+  $('#persistent').on('click', () => {
+    makeRequest("http://localhost:1234/random", timeout, makeRequest);
+    updateCounter($random, counter.random += 1);
+  })
 
   $('#immediate').on('click', () => {
     for (let i = 0; i < getMultiplier(); i++) {
@@ -80,7 +96,7 @@ $(document).ready(() => {
       </div>`;
   }
 
-  function makeRequest(url, timeout=50000) {
+  function makeRequest(url, timeout=50000, callback, delay=1000) {
     const id = (count += 1);
     const now = new Date();
     $.ajax(url, {
@@ -89,6 +105,7 @@ $(document).ready(() => {
     })
     .done(function(data) {
       $results.append(responseLine(id, now, data));
+      setTimeout(() => {callback && callback(url, timeout, callback, delay)}, delay);
     }).fail(function(error) {
       $results.append(responseLine(id, now, error));
     });

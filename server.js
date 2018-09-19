@@ -28,6 +28,46 @@ app.get('/range/:from-:to', (request, response) => {
   }
 })
 
+let q = [];
+
+function enqueue(queue, value) {
+  queue.push(value);
+}
+
+function dequeue(queue) {
+  queue.shift();
+}
+
+function peek(queue) {
+  return queue[queue.length - 1];
+}
+
+function isFull(queue) {
+  return false;
+}
+
+function isEmpty(queue) {
+  return queue.length == 0;
+}
+
+app.get('/queue', (request, response) => {
+  const startTime = new Date();
+  const id = setInterval(() => {
+    if (!isEmpty(q)) {
+      const stopTime = new Date();
+      respond(response, stopTime - startTime);
+      dequeue(q);
+      clearInterval(id);
+    }
+  }, 100);
+})
+
+app.get('/queue/push', (request, response) => {
+  enqueue(q, "data");
+  respond(response, 0);
+})
+
+
 app.listen(1234, () => {
   console.log('Express app listening on port 1234!');
 })
